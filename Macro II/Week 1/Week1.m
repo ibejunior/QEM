@@ -1,15 +1,15 @@
 path = 'C:\Users\couqu\OneDrive\Bureau\COURS QEM\S2\Macro II\Homework Week 1\';
-GDP = readtable(strcat(path,'GDP.csv'));
-Employee = readtable(strcat(path,'Employee.csv'));
-FixedAssets = readtable(strcat(path,'Fixed assets.csv'));
-Depreciation = readtable(strcat(path,'Depreciation.csv'));
-PriceIndex = readtable(strcat(path,'PriceIndex.csv'));
-TimeWorked = readtable(strcat(path,'TimeWorked.csv'));
+GDP = readtable(strcat(path,'1.1.5.csv'));
+Employee = readtable(strcat(path,'1.12.csv'));
+FixedAssets = readtable(strcat(path,'1.1.csv'));
+Depreciation = readtable(strcat(path,'1.3.csv'));
+PriceIndex = readtable(strcat(path,'1.1.4.csv'));
+TimeWorked = readtable(strcat(path,'6.9.csv'));
 
 
 
 % 1.2.3
-AdjustementGDP = sum((table2array(Employee([11,16,23,27],3:end))));
+AdjustementGDP = sum((table2array(Employee([11,21,23,27],3:end))));
 % 1.2.4
 NetGDP = table2array(GDP(3,3:end)) - AdjustementGDP;
 Ratio = table2array(Employee(4,3:end))./NetGDP;
@@ -25,13 +25,13 @@ gdp = table2array(GDP(3,3:end-1));
 gdp1 = table2array(GDP(3,4:end));
 deltaGDP = gdp1-gdp;
 subplot(2,3,2)
-plot(1961:2021,deltaK./deltaGDP)
+plot(1960:2021,table2array(FixedAssets(2,3:end))./table2array(GDP(3,3:end)))
 title("Capital-Output-Ratio")
 AverageCOR = (sum((deltaK./deltaGDP)))/60;
 %1.2.6
 capitalStock = table2array(FixedAssets(2,3:end));
 capitalDepreciation = table2array(Depreciation(3,3:end));
-RateDepreciation = ((capitalStock - capitalDepreciation)./capitalStock);
+RateDepreciation = 1 - ((capitalStock - capitalDepreciation)./capitalStock);
 subplot(2,3,3)
 plot(1960:2021,RateDepreciation)
 title("Capital rate depreciation")
